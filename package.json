@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "ma-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -20,6 +21,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "prisma": "^7.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
