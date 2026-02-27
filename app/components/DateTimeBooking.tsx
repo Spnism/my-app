@@ -421,7 +421,6 @@ export default function DateTimeBooking() {
                 padding: '15px 40px',
                 background: '#B22222',
                 color: '#fff',
-                border: 'none',
                 borderRadius: '30px',
                 fontSize: '20px',
                 fontWeight: 'bold',

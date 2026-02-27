@@ -413,11 +413,6 @@ export default function RegisterPage() {
                         เข้าสู่ระบบ
                     </Link>
                 </div>
-                <div style={{ textAlign: 'right', marginTop: 18 }}>
-                    <Link href="/forgot-password">
-                        <button style={styles.button}>Next &gt;</button>
-                    </Link>
-                </div>
             </div>
         </div>
     );

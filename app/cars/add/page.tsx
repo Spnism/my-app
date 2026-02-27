@@ -1,8 +1,8 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function AddCarPage() {
     const router = useRouter();
@@ -32,23 +32,25 @@ export default function AddCarPage() {
             letterSpacing: '7px',
         },
         nav: {
-            display: 'flex',
+           display: 'flex',
             gap: '20px',
             alignItems: 'center',
+            color: '#333',
         },
         navBtn: {
-            background: '#dd0019',
+            background: '#B22222',
             color: 'white',
             border: 'none',
             padding: '14px 30px',
-            borderRadius: '25px',
-            fontSize: '16px',
-            fontWeight: '600',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
             textDecoration: 'none',
             display: 'inline-block',
-            boxShadow: '0 3px 8px rgba(0,0,0,0.2)',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
+
         },
         container: {
             padding: '40px',
@@ -63,6 +65,7 @@ export default function AddCarPage() {
         },
         formSection: {
             marginBottom: '40px',
+            color: '#333',
         },
         sectionLabel: {
             fontSize: '18px',
@@ -90,7 +93,7 @@ export default function AddCarPage() {
             transition: 'border-color 0.3s ease',
             '&:focus': {
                 outline: 'none',
-                borderColor: '#dd0019',
+                borderColor: '#333',
             },
         },
         brandsGrid: {
@@ -193,7 +196,7 @@ export default function AddCarPage() {
                         style={styles.input}
                         placeholder="กรุณากรอกเลขทะเบียนรถของท่าน"
                         value={licensePlate}
-                        onChange={(e) => setLicensePlate(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLicensePlate(e.target.value)}
                     />
                 </div>
 
