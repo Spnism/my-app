@@ -254,7 +254,7 @@ export default function MenuPage() {
                             onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
                         >
                             <img 
-                                src="https://images.pexels.com/photos/3860969/pexels-photo-3860969.jpeg" 
+                                src="https://autolifethailand.tv/wp-content/uploads/2022/03/shutterstock_1859193349s.jpg" 
                                 alt="ล้างรถ" 
                                 style={styles.serviceCardImage}
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🚗%3C/text%3E%3C/svg%3E' }}
@@ -275,7 +275,7 @@ export default function MenuPage() {
                             onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
                         >
                             <img 
-                                src="https://images.pexels.com/photos/279810/pexels-photo-279810.jpeg" 
+                                src="https://kleansquare.com/wp-content/uploads/2023/04/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B3%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B0%E0%B8%AD%E0%B8%B2%E0%B8%94%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%A3%E0%B8%96%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%87%E0%B9%88%E0%B8%B2%E0%B8%A2-%E0%B9%86-%E0%B8%A5%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%95%E0%B8%99%E0%B9%80%E0%B8%AD%E0%B8%87%E0%B9%84%E0%B8%94%E0%B9%89.png" 
                                 alt="ล้างภายใน" 
                                 style={styles.serviceCardImage}
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🧹%3C/text%3E%3C/svg%3E' }}
@@ -296,7 +296,7 @@ export default function MenuPage() {
                             onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
                         >
                             <img 
-                                src="https://images.pexels.com/photos/3938021/pexels-photo-3938021.jpeg" 
+                                src="https://kleansquare.com/wp-content/uploads/2022/12/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%82%E0%B8%B1%E0%B8%94%E0%B8%AA%E0%B8%B5%E0%B8%A3%E0%B8%96%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%84%E0%B8%A3%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%96%E0%B8%B9%E0%B8%81%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5.png" 
                                 alt="ขัดสี" 
                                 style={styles.serviceCardImage}
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E✨%3C/text%3E%3C/svg%3E' }}
@@ -317,7 +317,7 @@ export default function MenuPage() {
                             onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
                         >
                             <img 
-                                src="https://images.pexels.com/photos/3938027/pexels-photo-3938027.jpeg" 
+                                src="https://87-garage.com/wp-content/uploads/2023/03/87Garage-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%9A%E0%B9%80%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%96-%E0%B8%97%E0%B8%B3%E0%B8%A2%E0%B8%B1%E0%B8%87%E0%B9%84%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%94%E0%B8%B9%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A1-001.webp" 
                                 alt="เคลือบเงา" 
                                 style={styles.serviceCardImage}
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E💎%3C/text%3E%3C/svg%3E' }}

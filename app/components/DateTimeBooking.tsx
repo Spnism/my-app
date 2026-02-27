@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function DateTimeBooking() {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [isBooked, setIsBooked] = useState(false);
+  const router = useRouter();
 
   // Generate available time slots
   const timeSlots = [
@@ -27,10 +29,12 @@ export default function DateTimeBooking() {
 
   const handlePrevMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+    setSelectedDate('');
   };
 
   const handleNextMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+    setSelectedDate('');
   };
 
   const handleDateClick = (day: number) => {
@@ -85,9 +89,44 @@ export default function DateTimeBooking() {
     }
   };
 
+  const handleNext = () => {
+    if (selectedDate && selectedTime) {
+      let serviceLabel = 'Wash Basic';
+      let price = 300;
+      try {
+        const sel = localStorage.getItem('selectedServices');
+        if (sel) {
+          const arr = JSON.parse(sel);
+          if (Array.isArray(arr) && arr.length > 0) {
+            serviceLabel = arr.join(', ');
+            price = 300 * arr.length;
+          }
+        }
+      } catch (e) {}
+
+      const booking = {
+        date: selectedDate,
+        time: selectedTime,
+        service: serviceLabel,
+        price: price,
+        createdAt: new Date().toISOString(),
+      };
+      try {
+        localStorage.setItem('booking', JSON.stringify(booking));
+      } catch (e) {}
+
+      router.push('/payMent');
+    }
+  };
+
   const daysInMonth = getDaysInMonth(currentMonth);
   const firstDay = getFirstDayOfMonth(currentMonth);
   const monthName = currentMonth.toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+
+  // figure out selected day number for easier comparison
+  const selectedDay = selectedDate
+    ? String(parseInt(selectedDate.split('-')[2], 10))
+    : null;
 
   const calendarDays: (number | null)[] = [];
   for (let i = 0; i < firstDay; i++) {
@@ -102,55 +141,31 @@ export default function DateTimeBooking() {
       {/* Header */}
       <header
         style={{
-          background: 'linear-gradient(135deg, #c41e3a 0%, #000000 100%)',
+          background: 'linear-gradient(135deg, #b22222 0%, #000000 100%)',
           padding: '25px 40px',
           boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-end',
           alignItems: 'center',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <div
-            style={{
-              width: '50px',
-              height: '50px',
-              background: 'linear-gradient(135deg, #87C540 0%, #A4D65E 100%)',
-              borderRadius: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '28px',
-              fontWeight: 'bold',
-              color: '#fff',
-            }}
-          >
-            🚗
-          </div>
-          <h1
-            style={{
-              fontSize: '40px',
-              fontWeight: 'bold',
-              color: '#fff',
-              letterSpacing: '3px',
-              margin: 0,
-            }}
-          >
-            Carwash
-          </h1>
-        </div>
+      
         <nav style={{ display: 'flex', gap: '15px' }}>
           <Link
             href="/"
             style={{
-              padding: '12px 25px',
               background: '#B22222',
-              color: '#fff',
-              textDecoration: 'none',
-              borderRadius: '25px',
-              fontWeight: '600',
-              border: '2px solid #fff',
-              transition: 'all 0.3s',
+            color: 'white',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none',
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
             }}
           >
             หน้าแรก
@@ -158,14 +173,18 @@ export default function DateTimeBooking() {
           <Link
             href="/login"
             style={{
-              padding: '12px 25px',
-              background: '#B22222',
-              color: '#fff',
-              textDecoration: 'none',
-              borderRadius: '25px',
-              fontWeight: '600',
-              border: '2px solid #fff',
-              transition: 'all 0.3s',
+            background: '#B22222',
+            color: 'white',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none',
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
             }}
           >
             Account
@@ -173,14 +192,18 @@ export default function DateTimeBooking() {
           <Link
             href="/register"
             style={{
-              padding: '12px 25px',
-              background: '#B22222',
-              color: '#fff',
-              textDecoration: 'none',
-              borderRadius: '25px',
-              fontWeight: '600',
-              border: '2px solid #fff',
-              transition: 'all 0.3s',
+             background: '#ffffff',
+            color: '#b22222',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none',
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
             }}
           >
             ออกจากระบบ
@@ -226,13 +249,14 @@ export default function DateTimeBooking() {
               padding: '30px',
               borderRadius: '20px',
               boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
+              border: '2px solid #000',
             }}
           >
             <h3
               style={{
                 fontSize: '24px',
                 fontWeight: 'bold',
-                color: '#000',
+                color: '#b22222',
                 marginBottom: '20px',
               }}
             >
@@ -245,12 +269,13 @@ export default function DateTimeBooking() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '20px',
+                color: '#333',
               }}
             >
               <button
                 style={{
                   padding: '14px 30px',
-                  background: '#B22222',
+                  background: '#cc0000',
                   color: '#fff',
                   border: 'none',
                   borderRadius: '25px',
@@ -266,7 +291,7 @@ export default function DateTimeBooking() {
               <button
                 style={{
                   padding: '14px 30px',
-                  background: '#B22222',
+                  background: '#cc0000',
                   color: '#fff',
                   border: 'none',
                   borderRadius: '25px',
@@ -286,10 +311,17 @@ export default function DateTimeBooking() {
                 gridTemplateColumns: 'repeat(7, 1fr)',
                 gap: '8px',
                 marginBottom: '10px',
+                color: '#333',
+                textAlign: 'center',
+                fontWeight: '600',
               }}
             >
               {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map((d) => (
-                <div key={d} style={{ textAlign: 'center', fontWeight: '600' }}>
+                <div key={d} 
+                style={{ 
+                  color: '#333',
+                   textAlign: 'center',
+                    fontWeight: '600' }}>
                   {d}
                 </div>
               ))}
@@ -304,30 +336,34 @@ export default function DateTimeBooking() {
             >
               {calendarDays.map((day, i) =>
                 day ? (
-                  <div
+                  <button
                     key={i}
                     onClick={() => handleDateClick(day)}
                     style={{
-                      padding: '10px',
+                      width: '100%',
+                      height: '40px',
+                      padding: '0',
                       textAlign: 'center',
-                      borderRadius: '4px',
+                      borderRadius: '6px',
                       cursor: 'pointer',
-                      background:
-                        selectedDate &&
-                        selectedDate.split('T')[0].split('-')[2] ===
-                          String(day)
-                          ? '#B22222'
-                          : 'transparent',
-                      color:
-                        selectedDate &&
-                        selectedDate.split('T')[0].split('-')[2] ===
-                          String(day)
-                          ? '#fff'
-                          : '#000',
+                      border: '1px solid #B22222',
+                      outline: 'none',
+                      background: selectedDay === String(day) ? '#B22222' : 'transparent',
+                      color: selectedDay === String(day) ? '#fff' : '#000',
+                      transition: 'background 0.2s',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (selectedDay !== String(day)) e.currentTarget.style.background = '#f0f0f0';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (selectedDay !== String(day)) e.currentTarget.style.background = 'transparent';
                     }}
                   >
                     {day}
-                  </div>
+                  </button>
                 ) : (
                   <div key={i}></div>
                 )
@@ -342,13 +378,14 @@ export default function DateTimeBooking() {
               padding: '30px',
               borderRadius: '20px',
               boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
+              border: '2px solid #000',
             }}
           >
             <h3
               style={{
                 fontSize: '24px',
                 fontWeight: 'bold',
-                color: '#000',
+                color: '#b22222',
                 marginBottom: '20px',
               }}
             >
@@ -368,71 +405,50 @@ export default function DateTimeBooking() {
                   onClick={() => setSelectedTime(t)}
                   style={{
                     padding: '10px',
-                    border: '1px solid #ddd',
+                    border: '1px solid #B22222',
                     borderRadius: '6px',
-                    background: selectedTime === t ? '#c41e3a' : 'transparent',
+                    background: selectedTime === t ? '#B22222' : 'transparent',
                     color: selectedTime === t ? '#fff' : '#000',
                     cursor: 'pointer',
+                    transition: 'background 0.2s',
                   }}
-                >
-                  {t}
-                </button>
+                  onMouseEnter={(e) => {
+                    if (selectedTime !== t) e.currentTarget.style.background = '#f0f0f0';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (selectedTime !== t) e.currentTarget.style.background = selectedTime === t ? '#B22222' : 'transparent';
+                    }}
+                  >
+                    {t}
+                  </button>
               ))}
-            </div>
-
-            {selectedDate && selectedTime && (
-              <div
-                style={{
-                  marginTop: '20px',
-                  padding: '15px',
-                  background: '#fee',
-                  borderLeft: '4px solid #c41e3a',
-                }}
-              >
-                <div>สรุปการจอง</div>
-                <div>วันที่: {selectedDate}</div>
-                <div>เวลา: {selectedTime}</div>
-                <button
-                  onClick={handleBooking}
-                  style={{
-                    marginTop: '10px',
-                    background: '#B22222',
-                    color: '#fff',
-                    padding: '16px 50px',
-                    border: 'none',
-                    borderRadius: '25px',
-                    cursor: 'pointer',
-                    fontWeight: '600',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  ยืนยันการจอง
-                </button>
               </div>
-            )}
           </div>
-        </div>
 
-        {/* Bottom Next */}
-        <div style={{ textAlign: 'right', marginTop: '50px' }}>
-          <Link href="/payMent">
+          {/* Bottom Next */}
+          <div style={{ textAlign: 'right', marginTop: '50px' }}>
             <button
+              onClick={handleNext}
+              disabled={!selectedDate || !selectedTime}
               style={{
-                padding: '15px 40px',
-                background: '#B22222',
-                color: '#fff',
-                borderRadius: '30px',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                border: '3px solid #000',
-                cursor: 'pointer',
+               background: '#cc0000',
+            color: 'white',
+            border: 'none',
+            padding: '16px 50px',
+            borderRadius: '25px',
+            fontSize: '18px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            transition: 'all 0.5s ease',
+            boxShadow: '0 4px 12px rgba(178, 34, 34, 0.3)',
               }}
             >
               Next &gt;
             </button>
-          </Link>
-        </div>
+          </div>
+        </div>      
       </main>
     </div>
   );
 }
+

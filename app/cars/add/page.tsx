@@ -173,7 +173,7 @@ export default function AddCarPage() {
             <header style={styles.header}>
                 <div style={styles.logoText}>CAR WASH</div>
                 <nav style={styles.nav}>
-                    <Link href="/menu" style={styles.navBtn}>หน้าแรก</Link>
+                    <Link href="/" style={styles.navBtn}>หน้าแรก</Link>
                     <Link href="/menu" style={styles.navBtn}>Account</Link>
                     <button 
                         style={styles.navBtn}
