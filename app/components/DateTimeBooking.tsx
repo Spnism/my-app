@@ -3,11 +3,15 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import dayjs from 'dayjs';
+import 'dayjs/locale/th'; // Thai locale for month names
+
 
 export default function DateTimeBooking() {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
-  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date()); // stored as Date but manipulated with dayjs
+
   const [isBooked, setIsBooked] = useState(false);
   const router = useRouter();
 
@@ -18,32 +22,26 @@ export default function DateTimeBooking() {
     '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
   ];
 
-  // Get days in month
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  };
+  // date helpers using dayjs
+  const daysInMonth = (date: Date) => dayjs(date).daysInMonth();
+  const firstDayOfMonth = (date: Date) => dayjs(date).startOf('month').day();
 
   const handlePrevMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+    setCurrentMonth(dayjs(currentMonth).subtract(1, 'month').toDate());
     setSelectedDate('');
   };
 
   const handleNextMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+    setCurrentMonth(dayjs(currentMonth).add(1, 'month').toDate());
     setSelectedDate('');
   };
 
   const handleDateClick = (day: number) => {
-    const newDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const newDate = dayjs(currentMonth).date(day).startOf('day');
+    const today = dayjs().startOf('day');
 
-    if (newDate >= today) {
-      setSelectedDate(newDate.toISOString().split('T')[0]);
+    if (newDate.isSame(today) || newDate.isAfter(today)) {
+      setSelectedDate(newDate.format('YYYY-MM-DD'));
     }
   };
 
@@ -119,9 +117,9 @@ export default function DateTimeBooking() {
     }
   };
 
-  const daysInMonth = getDaysInMonth(currentMonth);
-  const firstDay = getFirstDayOfMonth(currentMonth);
-  const monthName = currentMonth.toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+  const daysInMonthCount = daysInMonth(currentMonth);
+  const firstDay = firstDayOfMonth(currentMonth);
+  const monthName = dayjs(currentMonth).locale('th').format('MMMM YYYY');
 
   // figure out selected day number for easier comparison
   const selectedDay = selectedDate
@@ -132,7 +130,7 @@ export default function DateTimeBooking() {
   for (let i = 0; i < firstDay; i++) {
     calendarDays.push(null);
   }
-  for (let i = 1; i <= daysInMonth; i++) {
+  for (let i = 1; i <= daysInMonthCount; i++) {
     calendarDays.push(i);
   }
 
