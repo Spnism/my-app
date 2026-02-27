@@ -129,6 +129,48 @@ export default function MenuPage() {
 
         starRow: { marginLeft: 60, marginTop: 12, display: 'flex', alignItems: 'center', gap: 10, fontWeight: 700, color: '#fff' },
 
+        serviceMenu: { marginTop: 40, marginLeft: 40, marginRight: 40, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 25 },
+        serviceCard: {
+            background: '#ffffff',
+            border: '4px solid #B22222',
+            borderRadius: 15,
+            overflow: 'hidden',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.25)',
+            display: 'flex',
+            flexDirection: 'column' as const,
+        },
+        serviceCardImage: {
+            width: '100%',
+            height: 220,
+            objectFit: 'cover' as const,
+            borderBottom: '4px solid #000',
+        },
+        serviceCardHover: {
+            transform: 'translateY(-8px)',
+            boxShadow: '0 12px 24px rgba(178, 34, 34, 0.4)',
+        },
+        serviceCardContent: { padding: 20, flex: 1, display: 'flex', flexDirection: 'column' as const, justifyContent: 'space-between' },
+        serviceCardTitle: { fontSize: 24, fontWeight: 900, color: '#B22222', marginBottom: 8 },
+        serviceCardDesc: { fontSize: 14, fontWeight: 600, color: '#333', marginBottom: 15, lineHeight: '1.5' },
+        serviceCardButton: {
+            background: '#B22222',
+            color: 'white',
+            border: 'none',
+            padding: '12px 20px',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            marginTop: 'auto',
+        },
+        serviceCardButtonHover: {
+            background: '#000000',
+            transform: 'scale(1.02)',
+        },
+
         iconsRow: { display: 'flex', gap: 18, marginTop: 18, justifyContent: 'flex-end' },
         iconBox: { width: 110, height: 110, border: '3px solid #000', borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' },
 
@@ -138,19 +180,16 @@ export default function MenuPage() {
 
         footerRow: { display: 'flex', justifyContent: 'flex-end', marginTop: 18, },
         nextBtn: {
-            background: '#CC0000',
+      background: '#cc0000',
             color: 'white',
             border: 'none',
-            padding: '14px 30px',
-            borderRadius: '10px',
-            fontSize: '30px',
-            fontWeight: '400',
+            padding: '16px 50px',
+            borderRadius: '25px',
+            fontSize: '18px',
+            fontWeight: '600',
             cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            textDecoration: 'none',
-            display: 'inline-block',
-            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
-            marginRight: 60,
+            transition: 'all 0.5s ease',
+            boxShadow: '0 4px 12px rgba(178, 34, 34, 0.3)',
         }
     };
 
@@ -167,7 +206,7 @@ export default function MenuPage() {
 
                     <nav style={styles.nav}>
                         <Link href="/" style={styles.navBtn}>หน้าแรก</Link>
-                        <Link href="/cars" style={styles.navBtn}>บัญชี</Link>
+                        <Link href="/menu" style={styles.navBtn}>account</Link>
                         <button style={styles.navBtnGhost} onClick={() => router.push('/login')}>ออกจากระบบ</button>
                     </nav>
                 </header>
@@ -179,7 +218,6 @@ export default function MenuPage() {
                             <br />
                             <div style={styles.actionsRow}>
                                 <button style={styles.actionPrimary} onClick={() => router.push('/cars')}>จองเลย</button>
-                                <button style={styles.actionSecondary} onClick={() => router.push('/history')}>ประวัติการล้าง</button>
                             </div>
                             <br />
                             <div style={styles.progressWrap}>
@@ -203,28 +241,97 @@ export default function MenuPage() {
                         </div>
                     </div>
 
-                    {/* Table */}
-                    <table style={styles.table}>
-                        <thead>
-                            <tr>
-                                <th style={styles.th}>วันที่</th>
-                                <th style={styles.th}>เวลา</th>
-                                <th style={styles.th}>รุ่นรถยนต์ / เลขทะเบียน</th>
-                                <th style={styles.th}>หมายเหตุ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* 4 empty rows as template */}
-                            {[0, 1, 2, 3].map(i => (
-                                <tr key={i}>
-                                    <td style={styles.td}></td>
-                                    <td style={styles.td}></td>
-                                    <td style={styles.td}></td>
-                                    <td style={styles.td}></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {/* Service Menu */}
+                    <div style={{ marginTop: 30, marginLeft: 40, marginBottom: 15 }}>
+                        <div style={{ fontSize: 32, fontWeight: 900, color: '#fff', marginBottom: 5 }}>บริการของเรา</div>
+                        <div style={{ height: 4, width: 150, background: '#FFD54F', borderRadius: 2 }}></div>
+                    </div>
+                    <div style={styles.serviceMenu}>
+                        {/* ล้างรถ */}
+                        <div 
+                            style={styles.serviceCard}
+                            onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.serviceCardHover)}
+                            onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
+                        >
+                            <img 
+                                src="https://images.pexels.com/photos/3860969/pexels-photo-3860969.jpeg" 
+                                alt="ล้างรถ" 
+                                style={styles.serviceCardImage}
+                                onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🚗%3C/text%3E%3C/svg%3E' }}
+                            />
+                            <div style={styles.serviceCardContent}>
+                                <div>
+                                    <div style={styles.serviceCardTitle}>ล้างรถ</div>
+                                    <div style={styles.serviceCardDesc}>ล้างรถแบบมืออาชีพด้วยสารเคมีที่ปลอดภัย ทำให้รถสะอาดเหมือนใหม่</div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        {/* ล้างภายใน */}
+                        <div 
+                            style={styles.serviceCard}
+                            onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.serviceCardHover)}
+                            onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
+                        >
+                            <img 
+                                src="https://images.pexels.com/photos/279810/pexels-photo-279810.jpeg" 
+                                alt="ล้างภายใน" 
+                                style={styles.serviceCardImage}
+                                onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🧹%3C/text%3E%3C/svg%3E' }}
+                            />
+                            <div style={styles.serviceCardContent}>
+                                <div>
+                                    <div style={styles.serviceCardTitle}>ล้างภายใน</div>
+                                    <div style={styles.serviceCardDesc}>ทำความสะอาดภายในรถ ดูดฝุ่น ล้างเบาะที่นั่ง และประตูรถ</div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        {/* ขัดสี */}
+                        <div 
+                            style={styles.serviceCard}
+                            onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.serviceCardHover)}
+                            onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
+                        >
+                            <img 
+                                src="https://images.pexels.com/photos/3938021/pexels-photo-3938021.jpeg" 
+                                alt="ขัดสี" 
+                                style={styles.serviceCardImage}
+                                onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E✨%3C/text%3E%3C/svg%3E' }}
+                            />
+                            <div style={styles.serviceCardContent}>
+                                <div>
+                                    <div style={styles.serviceCardTitle}>ขัดสี</div>
+                                    <div style={styles.serviceCardDesc}>ขัดสีรถเพื่อลบรอยขีดข่วน และให้สีรถเงางามเหมือนใหม่</div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        {/* เคลือบเงา */}
+                        <div 
+                            style={styles.serviceCard}
+                            onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.serviceCardHover)}
+                            onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: styles.serviceCard.boxShadow })}
+                        >
+                            <img 
+                                src="https://images.pexels.com/photos/3938027/pexels-photo-3938027.jpeg" 
+                                alt="เคลือบเงา" 
+                                style={styles.serviceCardImage}
+                                onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22220%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22300%22 height=%22220%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E💎%3C/text%3E%3C/svg%3E' }}
+                            />
+                            <div style={styles.serviceCardContent}>
+                                <div>
+                                    <div style={styles.serviceCardTitle}>เคลือบเงา</div>
+                                    <div style={styles.serviceCardDesc}>เคลือบสีรถด้วยเซรามิก ป้องกันแสงแดด และให้สีเงาวับ</div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+
                     <br />
                     <div style={styles.footerRow}>
                         <Link href="/cars">

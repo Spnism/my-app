@@ -400,11 +400,6 @@ export default function ForgotPasswordPage() {
                         ← กลับไปเข้าสู่ระบบ
                     </Link>
                 </div>
-                <div style={{ textAlign: 'right', marginTop: 18 }}>
-                    <Link href="/menu">
-                        <button style={styles.button}>Next &gt;</button>
-                    </Link>
-                </div>
             </div>
         </div>
     );

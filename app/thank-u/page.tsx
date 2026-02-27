@@ -1,5 +1,6 @@
 'use client';
 
+import router from 'next/dist/shared/lib/router/router';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -35,16 +36,41 @@ export default function ThankYouPage() {
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         },
         logo: { fontSize: 40, fontWeight: '700', color: '#fff' },
-        nav: { display: 'flex', gap: 16 },
+        nav: {   display: 'flex',
+            gap: '20px',
+            alignItems: 'center',
+            color: '#333', },
         navBtn: {
-            background: '#B22222',
-            color: '#fff',
-            padding: '12px 24px',
-            borderRadius: 25,
+              background: '#B22222',
+            color: 'white',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
             textDecoration: 'none',
-            fontWeight: 700,
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
+
+        },
+         navBtnGhost: {
+            background: '#ffffff',
+            color: '#b22222',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none',
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
         },
         container: {
+            color: '#333',
             maxWidth: 1100,
             margin: '40px auto',
             padding: '40px',
@@ -54,6 +80,7 @@ export default function ThankYouPage() {
         },
         title: { fontSize: 40, fontWeight: 800, marginBottom: 20 },
         receiptBox: {
+            color: '#333',
             margin: '20px auto',
             width: 720,
             borderRadius: 12,
@@ -74,11 +101,11 @@ export default function ThankYouPage() {
     return (
         <div style={styles.page}>
             <header style={styles.header}>
-                <div style={styles.logo}>Carwash</div>
+                <div style={styles.logo}>CAR WASH</div>
                 <nav style={styles.nav}>
                     <Link href="/" style={styles.navBtn}>หน้าแรก</Link>
-                    <Link href="/login" style={styles.navBtn}>Account</Link>
-                    <Link href="/" style={styles.navBtn}>ออกจากระบบ</Link>
+                    <Link href="/menu" style={styles.navBtn}>Account</Link>
+                    <button style={styles.navBtnGhost} onClick={() => router.push('/login')}>ออกจากระบบ</button>
                 </nav>
             </header>
 
@@ -120,8 +147,8 @@ export default function ThankYouPage() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
                             <div>
                                 <div style={{ fontWeight: 700 }}>{booking?.service ?? '-'}</div>
-                                <div style={{ color: '#6b7280' }}>วันที่จอง: {booking?.date ?? '-'}</div>
-                                <div style={{ color: '#6b7280' }}>เวลาที่จอง: {booking?.time ?? '-'}</div>
+                                <div style={{ color: '#333' }}>วันที่จอง: {booking?.date ?? '-'}</div>
+                                <div style={{ color: '#333' }}>เวลาที่จอง: {booking?.time ?? '-'}</div>
                             </div>
                             <div style={{ alignSelf: 'center' }}>1</div>
                             <div style={{ textAlign: 'right', alignSelf: 'center' }}>{(booking?.price ?? 0).toFixed(2)}</div>

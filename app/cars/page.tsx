@@ -34,23 +34,25 @@ export default function SelectCarPage() {
             letterSpacing: '7px',
         },
         nav: {
-            display: 'flex',
+           display: 'flex',
             gap: '20px',
             alignItems: 'center',
+            color: '#333',
         },
         navBtn: {
-            background: '#dd0019',
+         background: '#B22222',
             color: 'white',
             border: 'none',
             padding: '14px 30px',
-            borderRadius: '25px',
-            fontSize: '16px',
-            fontWeight: '600',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
             textDecoration: 'none',
             display: 'inline-block',
-            boxShadow: '0 3px 8px rgba(0,0,0,0.2)',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
+
         },
         container: {
             padding: '40px',
@@ -124,6 +126,20 @@ export default function SelectCarPage() {
             boxShadow: '0 4px 12px rgba(178, 34, 34, 0.3)',
             marginLeft: '15px',
         },
+         navBtnGhost: {
+            background: '#ffffff',
+            color: '#b22222',
+            border: 'none',
+            padding: '14px 30px',
+            borderRadius: '10px',
+            fontSize: '25px',
+            fontWeight: '400',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none',
+            display: 'inline-block',
+            boxShadow: '0 3px 8px rgba(91, 159, 214, 0.3)',
+        },  
         addCarBtn: {
             background: '#B22222',
             color: 'white',
@@ -152,12 +168,7 @@ export default function SelectCarPage() {
                 <nav style={styles.nav}>
                     <Link href="/menu" style={styles.navBtn}>หน้าแรก</Link>
                     <Link href="/menu" style={styles.navBtn}>Account</Link>
-                    <button 
-                        style={styles.navBtn} 
-                        onClick={() => router.push('/login')}
-                    >
-                        ออกจากระบบ
-                    </button>
+                    <button style={styles.navBtnGhost} onClick={() => router.push('/login')}>ออกจากระบบ</button>
                 </nav>
             </header>
 

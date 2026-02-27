@@ -233,11 +233,7 @@ export default function LoginPage() {
                         สมัครสมาชิก
                     </Link>
                 </div>
-                <div style={{ textAlign: 'right', marginTop: 18 }}>
-                    <Link href="/register">
-                        <button style={styles.button}>Next &gt;</button>
-                    </Link>
-                </div>
+
             </div>
         </div>
     );
